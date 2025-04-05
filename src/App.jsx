@@ -6,6 +6,8 @@ import Produk from "./pages/Produk";
 import Keranjang from "./pages/Keranjang";
 import Pembayaran from "./pages/Pembayaran";
 import Profil from "./pages/Profil";
+import RiwayatTransaksi from "./pages/RiwayatTransaksi";
+import Invoice from "./pages/Invoice";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/keranjang" element={<Keranjang />} />
           <Route path="/pembayaran" element={<Pembayaran />} />
           <Route path="/profil" element={<Profil />} />
+          <Route path="/riwayat" element={<RiwayatTransaksi />} />
+          <Route path="/invoice/:id" element={<Invoice />} />
         </Routes>
       </div>
     </div>

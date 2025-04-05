@@ -1,9 +1,15 @@
+import { useCart } from "../context/CartContext";
+import { useNavigate } from "react-router-dom"; // ⬅️ import navigate
+
 function Home() {
+  const { addToCart } = useCart();
+  const navigate = useNavigate(); // ⬅️ buat navigate
+
   const rekomendasiParts = [
     {
       nama: "Intel Core i7 13700K",
       harga: "Rp 5.500.000",
-      img: "https://kkomputer.com/7077-thickbox_default/intel-core-i7-13700k-54-ghz-16c24t-lga-1700-rl.jpg", // Ganti sesuai gambar real
+      img: "https://kkomputer.com/7077-thickbox_default/intel-core-i7-13700k-54-ghz-16c24t-lga-1700-rl.jpg",
     },
     {
       nama: "ASUS ROG STRIX RTX 4070",
@@ -24,6 +30,21 @@ function Home() {
           Selamat datang di <span className="brand">Pc Part Ander</span>
         </h2>
         <p>Temukan komponen PC terbaik dengan harga terbaik.</p>
+        <button
+          onClick={() => navigate("/riwayat")}
+          className="btn-riwayat"
+          style={{
+            marginTop: "1rem",
+            padding: "10px 20px",
+            background: "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+          }}
+        >
+          Lihat Riwayat Transaksi
+        </button>
       </div>
 
       <section className="rekomendasi-section">
@@ -34,7 +55,19 @@ function Home() {
               <img src={part.img} alt={part.nama} className="part-image" />
               <h4>{part.nama}</h4>
               <p className="part-harga">{part.harga}</p>
-              <button className="btn-tambah">Tambah ke Keranjang</button>
+              <button
+                className="btn-tambah"
+                onClick={() =>
+                  addToCart({
+                    id: index + 1000,
+                    title: part.nama,
+                    price: parseInt(part.harga.replace(/[^\d]/g, "")) / 16000,
+                    image: part.img,
+                  })
+                }
+              >
+                Tambah ke Keranjang
+              </button>
             </div>
           ))}
         </div>
